@@ -1,0 +1,65 @@
+[
+  {
+    "id": "minesweeper",
+    "title": "Minesweeper Numbering",
+    "className": "MinesweeperNumbering",
+    "difficulty": 2,
+    "tags": ["Array 2D", "Boundary Check"],
+    "description": "กำหนด Array 2D ขนาด m x n ที่มีเลข 9 แทนระเบิด และเลข 0 แทนช่องว่าง ให้เขียนฟังก์ชันเติมตัวเลขในช่องว่าง โดยตัวเลขนั้นคือจำนวนระเบิดใน 8 ทิศทางรอบๆ ช่องนั้น",
+    "testCases": [
+      {
+        "id": "TC1",
+        "input": "{\n  {9, 0, 0},\n  {0, 0, 0},\n  {0, 0, 9}\n}",
+        "expected": "{\n  {9, 1, 0},\n  {1, 2, 1},\n  {0, 1, 9}\n}",
+        "note": "เช็คการนับระเบิดเฉียงและการเช็คขอบตารางมุมซ้ายบน-ขวาล่าง"
+      },
+      {
+        "id": "TC2",
+        "input": "{\n  {9, 0, 9, 0},\n  {0, 9, 0, 0},\n  {0, 0, 0, 9}\n}",
+        "expected": "{\n  {9, 3, 9, 1},\n  {2, 9, 3, 2},\n  {1, 1, 2, 9}\n}",
+        "note": "ช่องกระจายระเบิดตรงกลางที่ต้องนับได้มากกว่า 2 ลูกรอบทิศ"
+      }
+    ],
+    "starterCode": "import java.util.Arrays;\n\npublic class MinesweeperNumbering {\n    public static int[][] solve(int[][] map) {\n        // TODO: เติม Logic ตรงนี้\n        return map;\n    }\n\n    public static void main(String[] args) {\n        int[][] tc1 = {\n            {9, 0, 0},\n            {0, 0, 0},\n            {0, 0, 9}\n        };\n        System.out.println(\"--- Output TC1 ---\");\n        int[][] res = solve(tc1);\n        for (int[] row : res) {\n            System.out.println(Arrays.toString(row));\n        }\n    }\n}",
+    "solutionCode": "public static int[][] solve(int[][] map) {\n    int m = map.length, n = map[0].length;\n    int[][] res = new int[m][n];\n    int[] dr = {-1,-1,-1,0,0,1,1,1};\n    int[] dc = {-1,0,1,-1,1,-1,0,1};\n    for (int r = 0; r < m; r++) {\n        for (int c = 0; c < n; c++) {\n            if (map[r][c] == 9) {\n                res[r][c] = 9;\n                continue;\n            }\n            int bombs = 0;\n            for (int i = 0; i < 8; i++) {\n                int nr = r + dr[i], nc = c + dc[i];\n                if (nr>=0 && nr<m && nc>=0 && nc<n && map[nr][nc] == 9) bombs++;\n            }\n            res[r][c] = bombs;\n        }\n    }\n    return res;\n}",
+    "solutionExplanation": "ใช้ Direction Array (dr, dc) วนลูป 8 ทิศทางเพื่อลดโค้ด if-else ซ้ำซ้อน"
+  },
+  {
+    "id": "count-close-island",
+    "title": "Count Closed Islands (เกาะโดดเดี่ยว)",
+    "className": "CountCloseIsland",
+    "difficulty": 2,
+    "tags": ["Array 2D", "Boundary Check"],
+    "description": "กำหนดแผนที่ Array 2D ขนาด m x n ที่มีเลข 1 แทนผืนดิน และ 0 แทนผืนน้ำ ให้เขียนฟังก์ชันนับจำนวน 'เกาะโดดเดี่ยว' (Single-cell Closed Island)\n \nเงื่อนไขของเกาะโดดเดี่ยว:\n1. เป็นช่องที่มีค่าเป็น 1 เพียงช่องเดียว\n2. ช่องนั้นต้อง **ไม่อยู่ติดขอบตาราง** (ต้องมีช่องล้อมรอบครบทั้ง 8 ทิศ)\n3. ช่องเพื่อนบ้านรอบตัวทั้ง 8 ทิศ (บน, ล่าง, ซ้าย, ขวา, ทแยง 4 ทิศ) **ต้องเป็น 0 (น้ำ) ทั้งหมด**",
+    "testCases": [
+      {
+        "id": "TC1",
+        "input": "{\n  {0,0,0,0,1,0,0,0},\n  {1,0,0,1,0,0,1,0},\n  {1,1,1,0,0,0,0,0},\n  {1,0,0,0,0,0,0,0},\n  {0,0,0,1,0,1,0,0},\n  {0,0,0,0,0,0,0,0}\n}",
+        "expected": "3",
+        "note": "มีเกาะปิด 3 เกาะที่พิกัด [1][6], [4][3], [4][5] ส่วนเลข 1 ตัวอื่นมีเพื่อนบ้านติดกันหรืออยู่ขอบตาราง"
+      },
+      {
+        "id": "TC2",
+        "input": "{\n  {0,0,0,0,1,0,0,0},\n  {0,0,1,1,0,0,1,0},\n  {0,0,0,1,0,0,0,0},\n  {0,0,1,1,1,0,0,0},\n  {0,0,0,1,1,0,1,0},\n  {0,0,0,0,0,0,0,0}\n}",
+        "expected": "2",
+        "note": "มีเกาะปิด 2 เกาะ ที่พิกัด [1][6] และ [4][6]"
+      },
+      {
+        "id": "TC3",
+        "input": "{\n  {0,0,0},\n  {0,1,0},\n  {1,0,0}\n}",
+        "expected": "0",
+        "note": "เกาะตรงกลางมีเกาะมุมซ้ายล่างอยู่ทำให้ไม่ปิดเกาะปิด เกาะตรงมุมติดกับขอบไม่นับเป็นเกาะปิด"
+      },
+      {
+        "id": "TC4",
+        "input": "{\n  {1}\n}",
+        "expected": "0",
+        "note": "ตารางขนาด 1x1 ติดขอบทุกทิศทาง ไม่มีน้ำล้อมรอบ ถือว่าไม่เข้าเกณฑ์"
+      }
+    ],
+    "starterCode": "public class CountCloseIsland {\n\n    static int countCloseIsland(int[][] map) {\n        // your solution here\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        int[][] q1 = {\n            {0,0,0,0,1,0,0,0},\n            {1,0,0,1,0,0,1,0},\n            {1,1,1,0,0,0,0,0},\n            {1,0,0,0,0,0,0,0},\n            {0,0,0,1,0,1,0,0},\n            {0,0,0,0,0,0,0,0}\n        };\n        \n        int[][] q2 = {\n            {0,0,0,0,1,0,0,0},\n            {0,0,1,1,0,0,1,0},\n            {0,0,0,1,0,0,0,0},\n            {0,0,1,1,1,0,0,0},\n            {0,0,0,1,1,0,1,0},\n            {0,0,0,0,0,0,0,0}\n        };\n\n        int[][] q3 = {\n            {0,0,0},\n            {0,1,0},\n            {1,0,0}\n        };\n        \n        int[][] q4 = {\n            {1}\n        };\n        \n        System.out.println(\"q1: \" + countCloseIsland(q1) + \" | Expected: 1\");\n        System.out.println(\"q2: \" + countCloseIsland(q2) + \" | Expected: 2\");\n        System.out.println(\"q3: \" + countCloseIsland(q3) + \" | Expected: 1\");\n        System.out.println(\"q4: \" + countCloseIsland(q4) + \" | Expected: 0\");\n    }\n}",
+    "solutionCode": "static int countCloseIsland(int[][] map) {\n    int cnt = 0;\n    int m = map.length;\n    int n = map[0].length;\n    \n    for (int r = 0; r < m; r++) {\n        for (int c = 0; c < n; c++) {\n            if (map[r][c] == 1) {\n                // เช็คขอบตาราง ถ้าอยู่ขอบถือว่าไม่ได้ล้อมรอบด้วยน้ำ 8 ทิศ\n                if (r - 1 < 0 || r + 1 >= m || c - 1 < 0 || c + 1 >= n) continue;\n                \n                // เช็ค 4 ทิศหลัก (บน, ล่าง, ซ้าย, ขวา)\n                if (map[r - 1][c] == 1 || map[r + 1][c] == 1 || map[r][c - 1] == 1 || map[r][c + 1] == 1) continue;\n                \n                // เช็ค 4 ทิศแนวทแยง\n                if (map[r - 1][c - 1] == 1 || map[r + 1][c + 1] == 1 || map[r - 1][c + 1] == 1 || map[r + 1][c - 1] == 1) continue;\n\n                cnt++;\n            }\n        }\n    }\n    return cnt;\n}",
+    "solutionExplanation": "ใช้เงื่อนไขคัดออก (Early Guard/Continue):\n1. เช็คว่าถ้าเป็นช่องขอบตาราง ให้ข้ามทันที เพราะไม่มีทางมีเพื่อนบ้านครบ 8 ทิศ\n2. เช็คเพื่อนบ้านรอบตัวทั้ง 8 ทิศ หากทิศใดทิศหนึ่งเป็น 1 ให้ข้ามทันที\n3. หากผ่านทุกเงื่อนไข แสดงว่าเป็นเลข 1 ที่ล้อมด้วย 0 ทั้ง 8 ทิศทาง จึงนับคะแนนเพิ่มขึ้น 1"
+  }
+  
+]
