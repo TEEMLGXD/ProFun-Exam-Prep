@@ -60,6 +60,36 @@
     "starterCode": "public class CountCloseIsland {\n\n    static int countCloseIsland(int[][] map) {\n        // your solution here\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        int[][] q1 = {\n            {0,0,0,0,1,0,0,0},\n            {1,0,0,1,0,0,1,0},\n            {1,1,1,0,0,0,0,0},\n            {1,0,0,0,0,0,0,0},\n            {0,0,0,1,0,1,0,0},\n            {0,0,0,0,0,0,0,0}\n        };\n        \n        int[][] q2 = {\n            {0,0,0,0,1,0,0,0},\n            {0,0,1,1,0,0,1,0},\n            {0,0,0,1,0,0,0,0},\n            {0,0,1,1,1,0,0,0},\n            {0,0,0,1,1,0,1,0},\n            {0,0,0,0,0,0,0,0}\n        };\n\n        int[][] q3 = {\n            {0,0,0},\n            {0,1,0},\n            {1,0,0}\n        };\n        \n        int[][] q4 = {\n            {1}\n        };\n        \n        System.out.println(\"q1: \" + countCloseIsland(q1) + \" | Expected: 1\");\n        System.out.println(\"q2: \" + countCloseIsland(q2) + \" | Expected: 2\");\n        System.out.println(\"q3: \" + countCloseIsland(q3) + \" | Expected: 1\");\n        System.out.println(\"q4: \" + countCloseIsland(q4) + \" | Expected: 0\");\n    }\n}",
     "solutionCode": "static int countCloseIsland(int[][] map) {\n    int cnt = 0;\n    int m = map.length;\n    int n = map[0].length;\n    \n    for (int r = 0; r < m; r++) {\n        for (int c = 0; c < n; c++) {\n            if (map[r][c] == 1) {\n                // เช็คขอบตาราง ถ้าอยู่ขอบถือว่าไม่ได้ล้อมรอบด้วยน้ำ 8 ทิศ\n                if (r - 1 < 0 || r + 1 >= m || c - 1 < 0 || c + 1 >= n) continue;\n                \n                // เช็ค 4 ทิศหลัก (บน, ล่าง, ซ้าย, ขวา)\n                if (map[r - 1][c] == 1 || map[r + 1][c] == 1 || map[r][c - 1] == 1 || map[r][c + 1] == 1) continue;\n                \n                // เช็ค 4 ทิศแนวทแยง\n                if (map[r - 1][c - 1] == 1 || map[r + 1][c + 1] == 1 || map[r - 1][c + 1] == 1 || map[r + 1][c - 1] == 1) continue;\n\n                cnt++;\n            }\n        }\n    }\n    return cnt;\n}",
     "solutionExplanation": "ใช้เงื่อนไขคัดออก (Early Guard/Continue):\n1. เช็คว่าถ้าเป็นช่องขอบตาราง ให้ข้ามทันที เพราะไม่มีทางมีเพื่อนบ้านครบ 8 ทิศ\n2. เช็คเพื่อนบ้านรอบตัวทั้ง 8 ทิศ หากทิศใดทิศหนึ่งเป็น 1 ให้ข้ามทันที\n3. หากผ่านทุกเงื่อนไข แสดงว่าเป็นเลข 1 ที่ล้อมด้วย 0 ทั้ง 8 ทิศทาง จึงนับคะแนนเพิ่มขึ้น 1"
-  }
-  
+  },
+  {
+  "id": "x-sum-no-dupe",
+  "title": "X-Sum I (ผลรวมเส้นทแยงมุมรูปตัว X ไม่นับช่องซ้ำ)",
+  "className": "XsumNoDupe_I",
+  "difficulty": 1,
+  "tags": ["Array 2D"],
+  "description": "กำหนด Array 2D ขนาด m x n (โดยที่ m == n หรือเป็นตารางจัตุรัสเสมอ)\nให้เขียนฟังก์ชัน Xsum คำนวณผลรวมของสมาชิกทั้งหมดที่อยู่บนเส้นทแยงมุมรูปตัว X (ทั้งเส้นทแยงมุมหลักและเส้นทแยงมุมรอง)\n\nข้อควรระวัง:\nหากตารางมีขนาดเป็นจำนวนหัก (เช่น 3x3, 5x5) ช่องที่อยู่ตรงจุดตัดกลางตารางจะถูกทับซ้อนกันระหว่าง 2 เส้นทแยงมุม ห้ามคำนวณค่าในช่องนั้นซ้ำสองรอบ",
+  "testCases": [
+    {
+      "id": "TC1",
+      "input": "{\n  {1, 2, 3},\n  {4, 5, 6},\n  {7, 8, 9}\n}",
+      "expected": "25",
+      "note": "ทแยงหลัก (1+5+9=15) + ทแยงรอง (3+5+7=15) = 30 ลบช่องกลาง (5) ออก 1 ตัว เหลือ 25"
+    },
+    {
+      "id": "TC2",
+      "input": "{\n  {1, 1, 2, 2, 3},\n  {3, 4, 4, 5, 5},\n  {6, 6, 7, 7, 8},\n  {8, 9, 9, 10, 10},\n  {11, 11, 12, 12, 13}\n}",
+      "expected": "62",
+      "note": "ทแยงหลัก (35) + ทแยงรอง (35) = 70 ลบช่องกลางเลข 7 ออก 1 ตัว เหลือ 63"
+    },
+    {
+      "id": "TC3",
+      "input": "{\n  {2, 23, 10, 8},\n  {33, 2, 8, 33},\n  {22, 6, 4, 55},\n  {6, 9, 9, 4}\n}",
+      "expected": "40",
+      "note": "ทแยงหลัก (2 + 2 + 4 + 4 = 12) + ทแยงรอง (6 + 6 + 8 + 8 = 28) ได้ 40 ไม่มีช่องที่ทับกัน ดังนั้นไม่มีการหักออก"
+    }
+  ],
+  "starterCode": "XsumNoDupe_I {\n    // m == n\n\n    static int Xsum(int[][] arr) {\n        // TODO: เขียนโค้ดของนายตรงนี้\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        int[][] q3_1 = {\n            {1, 2, 3},\n            {4, 5, 6},\n            {7, 8, 9}\n        };\n\n        int[][] q3_2 = {\n            {1, 1, 2, 2, 3},\n            {3, 4, 4, 5, 5},\n            {6, 6, 7, 7, 8},\n            {8, 9, 9, 10, 10},\n            {11, 11, 12, 12, 13}\n        };\n\n        int[][] q3_3 = {\n            {2, 23, 10, 8},\n            {33, 2, 8, 33},\n            {22, 6, 4, 55},\n            {6, 9, 9, 4}\n        };\n\n        System.out.println(\"q3_1 Output: \" + Xsum(q3_1) + \" | Expected: 25\");\n        System.out.println(\"q3_2 Output: \" + Xsum(q3_2) + \" | Expected: 62\");\n        System.out.println(\"q3_3 Output: \" + Xsum(q3_3) + \" | Expected: 40\");\n    }\n}",
+  "solutionCode": "static int Xsum(int[][] arr) {\n    int sum = 0;\n    int m = arr.length;\n    int n = arr.length;\n\n    for (int i = 0; i < m; i++) {\n        sum += arr[i][i];\n    }\n\n    for (int i = 0; i < n; i++) {\n        sum += arr[m - 1 - i][i];\n    }\n\n    if (m % 2 == 1) {\n        sum -= arr[m / 2][n / 2];\n    }\n\n    return sum;\n}",
+  "solutionExplanation": "1. ใช้ Loop แรกบวกค่าในเส้นทแยงมุมหลัก arr[i][i]\n2. ใช้ Loop ที่สองบวกค่าในเส้นทแยงมุมรอง arr[m - 1 - i][i]\n3. เช็คเงื่อนไข m % 2 == 1 หากตารางเป็นมิติเลขคี่ (เช่น 3x3, 5x5) ช่องตรงกลาง arr[m/2][n/2] จะถูกบวกทับซ้อน 2 รอบ ให้ลบออก 1 ครั้งเพื่อความถูกต้อง"
+}
 ]
