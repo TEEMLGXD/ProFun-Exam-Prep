@@ -20,7 +20,7 @@
         "note": "ช่องกระจายระเบิดตรงกลางที่ต้องนับได้มากกว่า 2 ลูกรอบทิศ"
       }
     ],
-    "starterCode": "import java.util.Arrays;\n\npublic class MinesweeperNumbering {\n    public static int[][] solve(int[][] map) {\n        // TODO: เติม Logic ตรงนี้\n        return map;\n    }\n\n    public static void main(String[] args) {\n        int[][] tc1 = {\n            {9, 0, 0},\n            {0, 0, 0},\n            {0, 0, 9}\n        };\n        System.out.println(\"--- Output TC1 ---\");\n        int[][] res = solve(tc1);\n        for (int[] row : res) {\n            System.out.println(Arrays.toString(row));\n        }\n    }\n}",
+    "starterCode": "import java.util.Arrays;\n\npublic class MinesweeperNumbering {\n    public static int[][] solve(int[][] map) {\n        // write your solution here\n        return map;\n    }\n\n    public static void main(String[] args) {\n        int[][] tc1 = {\n            {9, 0, 0},\n            {0, 0, 0},\n            {0, 0, 9}\n        };\n        System.out.println(\"--- Output TC1 ---\");\n        int[][] res = solve(tc1);\n        for (int[] row : res) {\n            System.out.println(Arrays.toString(row));\n        }\n    }\n}",
     "solutionCode": "public static int[][] solve(int[][] map) {\n    int m = map.length, n = map[0].length;\n    int[][] res = new int[m][n];\n    int[] dr = {-1,-1,-1,0,0,1,1,1};\n    int[] dc = {-1,0,1,-1,1,-1,0,1};\n    for (int r = 0; r < m; r++) {\n        for (int c = 0; c < n; c++) {\n            if (map[r][c] == 9) {\n                res[r][c] = 9;\n                continue;\n            }\n            int bombs = 0;\n            for (int i = 0; i < 8; i++) {\n                int nr = r + dr[i], nc = c + dc[i];\n                if (nr>=0 && nr<m && nc>=0 && nc<n && map[nr][nc] == 9) bombs++;\n            }\n            res[r][c] = bombs;\n        }\n    }\n    return res;\n}",
     "solutionExplanation": "ใช้ Direction Array (dr, dc) วนลูป 8 ทิศทางเพื่อลดโค้ด if-else ซ้ำซ้อน"
   },
@@ -57,7 +57,7 @@
         "note": "ตารางขนาด 1x1 ติดขอบทุกทิศทาง ไม่มีน้ำล้อมรอบ ถือว่าไม่เข้าเกณฑ์"
       }
     ],
-    "starterCode": "public class CountCloseIsland {\n\n    static int countCloseIsland(int[][] map) {\n        // your solution here\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        int[][] q1 = {\n            {0,0,0,0,1,0,0,0},\n            {1,0,0,1,0,0,1,0},\n            {1,1,1,0,0,0,0,0},\n            {1,0,0,0,0,0,0,0},\n            {0,0,0,1,0,1,0,0},\n            {0,0,0,0,0,0,0,0}\n        };\n        \n        int[][] q2 = {\n            {0,0,0,0,1,0,0,0},\n            {0,0,1,1,0,0,1,0},\n            {0,0,0,1,0,0,0,0},\n            {0,0,1,1,1,0,0,0},\n            {0,0,0,1,1,0,1,0},\n            {0,0,0,0,0,0,0,0}\n        };\n\n        int[][] q3 = {\n            {0,0,0},\n            {0,1,0},\n            {1,0,0}\n        };\n        \n        int[][] q4 = {\n            {1}\n        };\n        \n        System.out.println(\"q1: \" + countCloseIsland(q1) + \" | Expected: 1\");\n        System.out.println(\"q2: \" + countCloseIsland(q2) + \" | Expected: 2\");\n        System.out.println(\"q3: \" + countCloseIsland(q3) + \" | Expected: 1\");\n        System.out.println(\"q4: \" + countCloseIsland(q4) + \" | Expected: 0\");\n    }\n}",
+    "starterCode": "public class CountCloseIsland {\n\n    static int countCloseIsland(int[][] map) {\n        // write your solution here\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        int[][] q1 = {\n            {0,0,0,0,1,0,0,0},\n            {1,0,0,1,0,0,1,0},\n            {1,1,1,0,0,0,0,0},\n            {1,0,0,0,0,0,0,0},\n            {0,0,0,1,0,1,0,0},\n            {0,0,0,0,0,0,0,0}\n        };\n        \n        int[][] q2 = {\n            {0,0,0,0,1,0,0,0},\n            {0,0,1,1,0,0,1,0},\n            {0,0,0,1,0,0,0,0},\n            {0,0,1,1,1,0,0,0},\n            {0,0,0,1,1,0,1,0},\n            {0,0,0,0,0,0,0,0}\n        };\n\n        int[][] q3 = {\n            {0,0,0},\n            {0,1,0},\n            {1,0,0}\n        };\n        \n        int[][] q4 = {\n            {1}\n        };\n        \n        System.out.println(\"q1: \" + countCloseIsland(q1) + \" | Expected: 1\");\n        System.out.println(\"q2: \" + countCloseIsland(q2) + \" | Expected: 2\");\n        System.out.println(\"q3: \" + countCloseIsland(q3) + \" | Expected: 1\");\n        System.out.println(\"q4: \" + countCloseIsland(q4) + \" | Expected: 0\");\n    }\n}",
     "solutionCode": "static int countCloseIsland(int[][] map) {\n    int cnt = 0;\n    int m = map.length;\n    int n = map[0].length;\n    \n    for (int r = 0; r < m; r++) {\n        for (int c = 0; c < n; c++) {\n            if (map[r][c] == 1) {\n                // เช็คขอบตาราง ถ้าอยู่ขอบถือว่าไม่ได้ล้อมรอบด้วยน้ำ 8 ทิศ\n                if (r - 1 < 0 || r + 1 >= m || c - 1 < 0 || c + 1 >= n) continue;\n                \n                // เช็ค 4 ทิศหลัก (บน, ล่าง, ซ้าย, ขวา)\n                if (map[r - 1][c] == 1 || map[r + 1][c] == 1 || map[r][c - 1] == 1 || map[r][c + 1] == 1) continue;\n                \n                // เช็ค 4 ทิศแนวทแยง\n                if (map[r - 1][c - 1] == 1 || map[r + 1][c + 1] == 1 || map[r - 1][c + 1] == 1 || map[r + 1][c - 1] == 1) continue;\n\n                cnt++;\n            }\n        }\n    }\n    return cnt;\n}",
     "solutionExplanation": "ใช้เงื่อนไขคัดออก (Early Guard/Continue):\n1. เช็คว่าถ้าเป็นช่องขอบตาราง ให้ข้ามทันที เพราะไม่มีทางมีเพื่อนบ้านครบ 8 ทิศ\n2. เช็คเพื่อนบ้านรอบตัวทั้ง 8 ทิศ หากทิศใดทิศหนึ่งเป็น 1 ให้ข้ามทันที\n3. หากผ่านทุกเงื่อนไข แสดงว่าเป็นเลข 1 ที่ล้อมด้วย 0 ทั้ง 8 ทิศทาง จึงนับคะแนนเพิ่มขึ้น 1"
   },
@@ -88,8 +88,101 @@
       "note": "ทแยงหลัก (2 + 2 + 4 + 4 = 12) + ทแยงรอง (6 + 6 + 8 + 8 = 28) ได้ 40 ไม่มีช่องที่ทับกัน ดังนั้นไม่มีการหักออก"
     }
   ],
-  "starterCode": "XsumNoDupe_I {\n    // m == n\n\n    static int Xsum(int[][] arr) {\n        // TODO: เขียนโค้ดของนายตรงนี้\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        int[][] q3_1 = {\n            {1, 2, 3},\n            {4, 5, 6},\n            {7, 8, 9}\n        };\n\n        int[][] q3_2 = {\n            {1, 1, 2, 2, 3},\n            {3, 4, 4, 5, 5},\n            {6, 6, 7, 7, 8},\n            {8, 9, 9, 10, 10},\n            {11, 11, 12, 12, 13}\n        };\n\n        int[][] q3_3 = {\n            {2, 23, 10, 8},\n            {33, 2, 8, 33},\n            {22, 6, 4, 55},\n            {6, 9, 9, 4}\n        };\n\n        System.out.println(\"q3_1 Output: \" + Xsum(q3_1) + \" | Expected: 25\");\n        System.out.println(\"q3_2 Output: \" + Xsum(q3_2) + \" | Expected: 62\");\n        System.out.println(\"q3_3 Output: \" + Xsum(q3_3) + \" | Expected: 40\");\n    }\n}",
+  "starterCode": "XsumNoDupe_I {\n    // m == n\n\n    static int Xsum(int[][] arr) {\n        // write your solution here\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        int[][] q3_1 = {\n            {1, 2, 3},\n            {4, 5, 6},\n            {7, 8, 9}\n        };\n\n        int[][] q3_2 = {\n            {1, 1, 2, 2, 3},\n            {3, 4, 4, 5, 5},\n            {6, 6, 7, 7, 8},\n            {8, 9, 9, 10, 10},\n            {11, 11, 12, 12, 13}\n        };\n\n        int[][] q3_3 = {\n            {2, 23, 10, 8},\n            {33, 2, 8, 33},\n            {22, 6, 4, 55},\n            {6, 9, 9, 4}\n        };\n\n        System.out.println(\"q3_1 Output: \" + Xsum(q3_1) + \" | Expected: 25\");\n        System.out.println(\"q3_2 Output: \" + Xsum(q3_2) + \" | Expected: 62\");\n        System.out.println(\"q3_3 Output: \" + Xsum(q3_3) + \" | Expected: 40\");\n    }\n}",
   "solutionCode": "static int Xsum(int[][] arr) {\n    int sum = 0;\n    int m = arr.length;\n    int n = arr.length;\n\n    for (int i = 0; i < m; i++) {\n        sum += arr[i][i];\n    }\n\n    for (int i = 0; i < n; i++) {\n        sum += arr[m - 1 - i][i];\n    }\n\n    if (m % 2 == 1) {\n        sum -= arr[m / 2][n / 2];\n    }\n\n    return sum;\n}",
   "solutionExplanation": "1. ใช้ Loop แรกบวกค่าในเส้นทแยงมุมหลัก arr[i][i]\n2. ใช้ Loop ที่สองบวกค่าในเส้นทแยงมุมรอง arr[m - 1 - i][i]\n3. เช็คเงื่อนไข m % 2 == 1 หากตารางเป็นมิติเลขคี่ (เช่น 3x3, 5x5) ช่องตรงกลาง arr[m/2][n/2] จะถูกบวกทับซ้อน 2 รอบ ให้ลบออก 1 ครั้งเพื่อความถูกต้อง"
-}
+  },
+  {
+  "id": "maximum-subarray-sum",
+  "title": "Maximum Subarray Sum (ผลรวมช่วงย่อยมากที่สุด)",
+  "className": "MaximumSubarraySum",
+  "difficulty": 1,
+  "tags": ["Array 1D"],
+  "description": "กำหนด Array 1D ของจำนวนเต็ม arr (ซึ่งอาจมีทั้งค่าบวกและค่าลบ)\nให้เขียนฟังก์ชัน MaximumSubarraySum เพื่อหาผลรวมที่มากที่สุดของ Subarray (สมาชิกที่อยู่ติดกันเป็นช่วงต่อเนื่อง อย่างน้อย 1 ช่อง)\n\nข้อควรระวัง:\n- หาก Array มีแต่เลขติดลบ ผลลัพธ์ต้องคืนค่าเลขติดลบที่มีค่ามากที่สุด (ใกล้เคียง 0 ที่สุด)\n- ระวังกรณีที่เลขติดลบตรงกลางไม่ได้ติดลบมากพอที่จะทำให้ผลรวมสะสมดรอปจนต้องเริ่มนับใหม่",
+  "testCases": [
+    {
+      "id": "TC1",
+      "input": "{1, 2, 3, 4, 5, -6, 5, 4, 5, 8}",
+      "expected": "31",
+      "note": "ผลรวมสูงสุดครอบคลุมทั้งตาราง (รวมกันได้ 31)"
+    },
+    {
+      "id": "TC2",
+      "input": "{-2, -3, -4, -5, -6, 1, 2, -1}",
+      "expected": "3",
+      "note": "เลือกช่วง {1, 2} ได้ผลรวม 3"
+    },
+    {
+      "id": "TC3",
+      "input": "{2, -2, -2, 2, 2, 2, -2, -2, -2}",
+      "expected": "6",
+      "note": "เลือกช่วงตรงกลาง {2, 2, 2} ได้ผลรวม 6"
+    },
+    {
+      "id": "TC4",
+      "input": "{10, 20, -1, -2, 30}",
+      "expected": "57",
+      "note": "แม้จะมี -1, -2 แต่ผลรวมสะสมยังคุ้มที่จะรวมช่วงต่อ ได้ 10+20-1-2+30 = 57"
+    },
+    {
+      "id": "TC5",
+      "input": "{-76, -67}",
+      "expected": "-67",
+      "note": "ติดลบทุกตัว เลือกสมาชิกตัวเดียวที่ค่าน้อยสุดคือ -67"
+    }
+  ],
+  "starterCode": "public class MaximumSubarraySum {\n    static int MaximumSubarraySum(int[] arr)\n    {\n        // write your solution here\n    }\n    public static void main(String[] args) {\n        int[] q6_1 = {1, 2, 3, 4, 5, -6, 5, 4, 5, 8};\n        int[] q6_2 = {-2, -3, -4, -5, -6, 1, 2, -1};\n        int[] q6_3 = {2, -2, -2, 2, 2, 2, -2, -2, -2};\n        int[] q6_4 = {10, 20, -1, -2, 30};\n        int[] q6_5 = {-76, -67};\n\n        System.out.println(\"q6_1 Output: \" + MaximumSubarraySum(q6_1) + \" | Expected: 31\");\n        System.out.println(\"q6_2 Output: \" + MaximumSubarraySum(q6_2) + \" | Expected: 3\");\n        System.out.println(\"q6_3 Output: \" + MaximumSubarraySum(q6_3) + \" | Expected: 6\");\n        System.out.println(\"q6_4 Output: \" + MaximumSubarraySum(q6_4) + \" | Expected: 57\");\n        System.out.println(\"q6_5 Output: \" + MaximumSubarraySum(q6_5) + \" | Expected: -67\");\n    }\n}",
+  "solutionCode": "static int MaximumSubarraySum(int[] arr) {\n    int max = Integer.MIN_VALUE;\n    int sum = 0;\n\n    for (int r = 0; r < arr.length; r++) {\n        sum += arr[r];\n        \n        if (sum > max) {\n            max = sum;\n        }\n\n        if (sum < 0) {\n            sum = 0;\n        }\n    }\n\n    return max;\n}",
+  "solutionExplanation": "ใช้ Kadane's Algorithm:\n1. ตั้งค่า max เป็น Integer.MIN_VALUE เสมอ เพื่อรองรับกรณีที่ Array ติดลบทุกตัว\n2. บวกค่าสะสม sum ไปเรื่อยๆ ถ้า sum > max ให้ปรับอัปเดต max\n3. ถ้า sum ติดลบ (sum < 0) แสดงว่าช่วงที่บวกมาทั้งหมดจะทำให้ช่วงถัดไปค่าน้อยลง ให้ล้างค่า sum = 0 เพื่อเริ่มนับช่วงใหม่"
+  },
+  {
+  "id": "move-zeroes",
+  "title": "Move Zeroes (ย้าย 0 ไปไว้ท้าย Array)",
+  "className": "MoveZeroes",
+  "difficulty": 1,
+  "tags": ["Array 1D"],
+  "description": "กำหนด Array 1D ของจำนวนเต็ม arr ให้เขียนฟังก์ชัน MoveZeroes เพื่อย้ายเลข 0 ทั้งหมดใน Array ไปไว้ทางด้านขวาสุด (ท้าย Array)\nโดยต้องรักษาลำดับเดิมของตัวเลขที่ไม่ใช่ 0 เอาไว้ และต้องแก้ไขข้อมูลใน Array เดิมโดยตรง (In-place modification) \n cr. https://leetcode.com/problems/move-zeroes",
+  "testCases": [
+    {
+      "id": "TC1",
+      "input": "{1, 2, 0, 3, 4, 0, 5}",
+      "expected": "[1, 2, 3, 4, 5, 0, 0]",
+      "note": "ดันเลข 0 ทั้งสองตัวไปท้ายตาราง ลำดับตัวเลขอื่นยังเหมือนเดิม"
+    },
+    {
+      "id": "TC2",
+      "input": "{0, 1, 0}",
+      "expected": "[1, 0, 0]",
+      "note": "ดันเลข 1 มาข้างหน้า ย้าย 0 สองตัวไปข้างหลัง"
+    },
+    {
+      "id": "TC3 // from leet",
+      "input": "{0, 1, 0, 3, 12}",
+      "expected": "[1, 3, 12, 0, 0]",
+      "note": "Test case คลาสสิกจาก LeetCode"
+    },
+    {
+      "id": "TC4 // from leet",
+      "input": "{0}",
+      "expected": "[0]",
+      "note": "Edge case: Array ขนาด 1 ช่องเป็นเลข 0"
+    },
+    {
+      "id": "TC5",
+      "input": "{1, 0, 0}",
+      "expected": "[1, 0, 0]",
+      "note": "เลข 0 อยู่ท้ายตารางอยู่แล้ว"
+    },
+    {
+      "id": "TC6",
+      "input": "{8, 64, 0, 128, 256, 0, 0, 512}",
+      "expected": "[8, 64, 128, 256, 512, 0, 0, 0]",
+      "note": "ย้าย 0 ทั้งหมด 3 ตัวไปต่อท้าย"
+    }
+  ],
+  "starterCode": "import java.util.Arrays;\n\npublic class MoveZeroes {\n    static void MoveZeroes(int[] arr) {\n        // write your solution here;\n    }\n\n    public static void main(String[] args) {\n        int[] q7_1 = {1, 2, 0, 3, 4, 0, 5};\n        int[] q7_2 = {0, 1, 0};\n        int[] q7_3 = {0, 1, 0, 3, 12}; // from leet\n        int[] q7_4 = {0}; // from leet\n        int[] q7_5 = {1, 0, 0};\n        int[] q7_6 = {8, 64, 0, 128, 256, 0, 0, 512};\n\n        MoveZeroes(q7_1);\n        MoveZeroes(q7_2);\n        MoveZeroes(q7_3);\n        MoveZeroes(q7_4);\n        MoveZeroes(q7_5);\n        MoveZeroes(q7_6);\n        \n        System.out.println(Arrays.toString(q7_1));\n        System.out.println(Arrays.toString(q7_2));\n        System.out.println(Arrays.toString(q7_3));\n        System.out.println(Arrays.toString(q7_4));\n        System.out.println(Arrays.toString(q7_5));\n        System.out.println(Arrays.toString(q7_6));\n    }\n}",
+  "solutionCode": "static void MoveZeroes(int[] arr) {\n    int l = 0;\n    for (int i = 0; i < arr.length; i++) {\n        if (arr[i] != 0) {\n            int temp = arr[i];\n            arr[i] = arr[l];\n            arr[l] = temp;\n            l++;\n        }\n    }\n}",
+  "solutionExplanation": "ใช้เทคนิค Two Pointers (l และ i):\n1. ให้ pointer `l` เป็นตัวชี้ตำแหน่งแรกที่เป็นเลข 0 (หรือตำแหน่งที่จะเตรียมวางเลขที่ไม่ใช่ 0)\n2. วนลูป `i` ไล่ตรวจทุกสมาชิกใน Array\n3. เมื่อเจอค่าที่ไม่ใช่ 0 (`arr[i] != 0`) ให้ทำการ สลับค่า (Swap) ระหว่าง `arr[i]` กับ `arr[l]` แล้วขยับ `l++` ไปข้างหน้า 1 ตำแหน่ง\n4. เมื่อจบ Loop เลข 0 ทั้งหมดจะถูกดันไปอยู่ฝั่งขวาสุดของ Array โดยอัตโนมัติ"
+  }
+
 ]
